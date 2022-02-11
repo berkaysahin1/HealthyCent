@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "104640192334",
+    "project_id": "healthycent-c0d93",
+    "storage_bucket": "healthycent-c0d93.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:104640192334:android:5b83ecc12de16e3bb6081f",
+        "android_client_info": {
+          "package_name": "com.example.healthycent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "104640192334-hcd33kqijlmq4n3b0fkkvllnpldqt8ar.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnBEJcSyULjeO-Qa_xE51Ftxph5qcb488"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "104640192334-hcd33kqijlmq4n3b0fkkvllnpldqt8ar.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
