@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:healthycent/screens/home.dart';
+import 'package:healthycent/screens/qrscreen.dart';
 // import 'package:healthycent/widgets/icon_badge.dart';
 
 class MainScreen extends StatefulWidget {
@@ -10,7 +11,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   late PageController _pageController;
   int _page = 0;
-
+var sayfalar=[Home(),qrscreen()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +19,7 @@ class _MainScreenState extends State<MainScreen> {
         physics: NeverScrollableScrollPhysics(),
         controller: _pageController,
         onPageChanged: onPageChanged,
-        children: List.generate(4, (index) => Home()),
+        children: List.generate(sayfalar.length, (context) => sayfalar[context]),
       ),
       bottomNavigationBar: BottomAppBar(
         child: Row(
@@ -28,7 +29,7 @@ class _MainScreenState extends State<MainScreen> {
             SizedBox(width: 7.0),
             barIcon(icon: Icons.home, page: 0),
             barIcon(icon: Icons.favorite, page: 1),
-            barIcon(icon: Icons.mode_comment, page: 2, badge: true),
+            barIcon(icon: Icons.mode_comment, page: 2),
             barIcon(icon: Icons.person, page: 3),
             SizedBox(width: 7.0),
           ],
