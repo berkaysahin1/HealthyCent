@@ -14,7 +14,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   late PageController _pageController;
   int _page = 0;
-  var sayfalar = [Home(), QrScanScreen(), MapScreen(), Video(), DonateScreen()];
+  var sayfalar = [Home(), QrScanScreen(), MapScreen(), Video(), donatescreen()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
