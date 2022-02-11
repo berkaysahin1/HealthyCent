@@ -26,7 +26,7 @@ class _donatescreenState extends State<donatescreen> {
           Padding(
             padding: EdgeInsets.all(20.0),
             child: Text(
-              "Adımlarınız",
+              "Donate Screen",
               style: TextStyle(
                 fontSize: 30.0,
                 fontWeight: FontWeight.w600,

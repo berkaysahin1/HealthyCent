@@ -26,7 +26,7 @@ class _pedometerState extends State<pedometer> {
           Padding(
             padding: EdgeInsets.all(20.0),
             child: Text(
-              "Adımlarınız",
+              "Pedometer",
               style: TextStyle(
                 fontSize: 30.0,
                 fontWeight: FontWeight.w600,

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:healthycent/screens/donatescreen.dart';
 import 'package:healthycent/screens/home.dart';
+import 'package:healthycent/screens/mapscreen.dart';
+import 'package:healthycent/screens/pedometer.dart';
 import 'package:healthycent/screens/qrscreen.dart';
 // import 'package:healthycent/widgets/icon_badge.dart';
 
@@ -11,7 +14,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   late PageController _pageController;
   int _page = 0;
-var sayfalar=[Home(),qrscreen()];
+var sayfalar=[Home(),qrscreen(),mapscreen(),pedometer(),donatescreen()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
