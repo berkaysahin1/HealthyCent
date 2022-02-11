@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:healthycent/screens/donatescreen.dart';
 import 'package:healthycent/screens/home.dart';
 import 'package:healthycent/screens/mapscreen.dart';
-import 'package:healthycent/screens/pedometer.dart';
-import 'package:healthycent/screens/qrscreen.dart';
+import 'package:healthycent/screens/video.dart';
+import 'package:healthycent/screens/qrscanscreen.dart';
 // import 'package:healthycent/widgets/icon_badge.dart';
 
 class MainScreen extends StatefulWidget {
@@ -14,7 +14,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   late PageController _pageController;
   int _page = 0;
-var sayfalar=[Home(),qrscreen(),mapscreen(),pedometer(),donatescreen()];
+  var sayfalar = [Home(), QrScanScreen(), MapScreen(), Video(), DonateScreen()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +22,8 @@ var sayfalar=[Home(),qrscreen(),mapscreen(),pedometer(),donatescreen()];
         physics: NeverScrollableScrollPhysics(),
         controller: _pageController,
         onPageChanged: onPageChanged,
-        children: List.generate(sayfalar.length, (context) => sayfalar[context]),
+        children:
+            List.generate(sayfalar.length, (context) => sayfalar[context]),
       ),
       bottomNavigationBar: BottomAppBar(
         child: Row(
@@ -67,7 +68,7 @@ var sayfalar=[Home(),qrscreen(),mapscreen(),pedometer(),donatescreen()];
   Widget barIcon(
       {IconData icon = Icons.home, int page = 0, bool badge = false}) {
     return IconButton(
-      icon:Icon(icon, size: 24.0),
+      icon: Icon(icon, size: 24.0),
       color:
           _page == page ? Theme.of(context).accentColor : Colors.blueGrey[300],
       onPressed: () => _pageController.jumpToPage(page),
