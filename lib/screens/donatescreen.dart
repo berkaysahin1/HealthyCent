@@ -1,7 +1,5 @@
 import 'dart:collection';
-
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:healthycent/db/Vakiflar.dart';
 import 'package:healthycent/db/Videos.dart';
@@ -20,16 +18,19 @@ class _donatescreenState extends State<donatescreen> {
   void main() async {
     WidgetsFlutterBinding.ensureInitialized();
     Firebase.initializeApp();
-
   }
-  Future<List<Vakiflar>> vakifList()async{
-    var db =await VeritabaniYardimcisi.veritabaniErisim();
-    List<Map<String,dynamic>> maps=await db.rawQuery("SELECT * FROM Vakiflar");
-    return List.generate(maps.length,(i){
-      var satir=maps[i];
-      return Vakiflar(satir["vakif_Id"], satir["vakif_Foto"], satir["vakif_Adi"], satir["vakif_Alani"], satir["vakif_Icerik"]);
+
+  Future<List<Vakiflar>> vakifList() async {
+    var db = await VeritabaniYardimcisi.veritabaniErisim();
+    List<Map<String, dynamic>> maps =
+        await db.rawQuery("SELECT * FROM Vakiflar");
+    return List.generate(maps.length, (i) {
+      var satir = maps[i];
+      return Vakiflar(satir["vakif_Id"], satir["vakif_Foto"],
+          satir["vakif_Adi"], satir["vakif_Alani"], satir["vakif_Icerik"]);
     });
   }
+
   // var videolar = [
   //   "Sıfırdan Komple Java Geliştirici Kursu",
   //   "Başlangıçtan İleri Seviyeye Mobil Uygulama",
@@ -39,23 +40,22 @@ class _donatescreenState extends State<donatescreen> {
   //   "Müzik Teorisi (Armoni):1",
   //   "Yeni Başlayanlar İçin Elektro Gitar",
   // ];
-  late int spbakiye;
-  Future<void> girisOku() async{
-    var sp= await SharedPreferences.getInstance();
+  late int spbakiye = 0;
+  Future<void> girisOku() async {
+    var sp = await SharedPreferences.getInstance();
     setState(() {
-      spbakiye=sp.getInt("bakiye")!;
-
+      spbakiye = sp.getInt("bakiye")!;
     });
   }
+
   @override
-  void initState(){
+  void initState() {
     super.initState();
     girisOku();
   }
+
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
         appBar: AppBar(
           title: Text("HealthyCent"),
@@ -84,7 +84,8 @@ class _donatescreenState extends State<donatescreen> {
             Padding(
               padding: EdgeInsets.all(14.0),
               child: Text(
-                "Vakiflar",textAlign: TextAlign.center,
+                "Vakiflar",
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
                   fontWeight: FontWeight.w600,
@@ -93,18 +94,17 @@ class _donatescreenState extends State<donatescreen> {
             ),
             videocek(context),
           ],
-        )
-    );
-
+        ));
   }
-  videocek(BuildContext context){
+
+  videocek(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(top: 10.0, left: 20.0),
       height: 310.0,
       child: FutureBuilder<List<Vakiflar>>(
         future: vakifList(),
-        builder: (context,snapshot){
-          if(snapshot.hasData){
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
             var vakiflist = snapshot.data;
             return GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -112,11 +112,16 @@ class _donatescreenState extends State<donatescreen> {
                 childAspectRatio: 2 / 3,
               ),
               itemCount: vakiflist!.length,
-              itemBuilder: (context,index){
-                var vakif=vakiflist[index];
+              itemBuilder: (context, index) {
+                var vakif = vakiflist[index];
                 return GestureDetector(
-                  onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => vakiflarDetails(vakif: vakif,)));
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => vakiflarDetails(
+                                  vakif: vakif,
+                                )));
                     print("vakif adı: ${vakif.vakif_Adi}");
                   },
                   child: Card(
@@ -128,16 +133,28 @@ class _donatescreenState extends State<donatescreen> {
                           padding: const EdgeInsets.all(8.0),
                           child: Image.network("${vakif.vakif_Foto}"),
                         ),
-                        Text(vakif.vakif_Adi,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,color: Colors.white),),
-                        Text(vakif.vakif_Alani,style: TextStyle(fontSize: 12,color: Colors.white),),
+                        Text(
+                          vakif.vakif_Adi,
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                        Text(
+                          vakif.vakif_Alani,
+                          style: TextStyle(fontSize: 12, color: Colors.white),
+                        ),
                       ],
                     ),
                   ),
                 );
               },
             );
-          }else{
-            return Center(child: CircularProgressIndicator(color: Color.fromRGBO(255, 169, 50, 1),));
+          } else {
+            return Center(
+                child: CircularProgressIndicator(
+              color: Color.fromRGBO(255, 169, 50, 1),
+            ));
           }
         },
       ),

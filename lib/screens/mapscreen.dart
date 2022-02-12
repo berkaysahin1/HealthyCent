@@ -14,47 +14,68 @@ class _MapScreenState extends State<MapScreen> {
       CameraPosition(target: LatLng(37.773972, -122.431297), zoom: 11.5);
 
   GoogleMapController? _googleMapController;
+  Marker? _origin;
+  Marker? _destination;
 
   @override
   void dispose() {
     _googleMapController!.dispose();
     super.dispose();
   }
-  late int spbakiye;
-  Future<void> girisOku() async{
-    var sp= await SharedPreferences.getInstance();
-    setState(() {
-      spbakiye=sp.getInt("bakiye")!;
 
+  void _addMarker(LatLng pos) {
+    if (_origin == null || (_origin != null && _destination != null)) {
+      setState(() {
+        _origin = Marker(
+            markerId: const MarkerId('origin'),
+            infoWindow: const InfoWindow(title: 'Origin'),
+            icon: BitmapDescriptor.defaultMarkerWithHue(
+                BitmapDescriptor.hueGreen),
+            position: pos);
+
+        _destination = null;
+      });
+    } else {
+      setState(() {
+        _origin = Marker(
+            markerId: const MarkerId('destination'),
+            infoWindow: const InfoWindow(title: 'Destination'),
+            icon:
+                BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+            position: pos);
+
+        _destination = null;
+      });
+    }
+  }
+
+  late int spbakiye = 0;
+  Future<void> girisOku() async {
+    var sp = await SharedPreferences.getInstance();
+    setState(() {
+      spbakiye = sp.getInt("bakiye")!;
     });
   }
+
   @override
-  void initState(){
+  void initState() {
     super.initState();
     girisOku();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.yellowAccent.shade700,
         title: Text("HealthyCent"),
-        centerTitle: true,
+        centerTitle: false,
         actions: <Widget>[
           Card(
             color: Colors.green,
             shape: RoundedRectangleBorder(
               // side: BorderSide(color: Colors.white70, width: 1),
               borderRadius: BorderRadius.circular(10),
-            ),
-            // margin: EdgeInsets.all(7.0),
-            child: Padding(
-              padding: const EdgeInsets.only(top: 8, right: 3, left: 3),
-              child: Text(
-                'Bakiye: ${spbakiye}TL',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 22, color: Colors.white),
-              ),
             ),
           ),
         ],
@@ -64,6 +85,11 @@ class _MapScreenState extends State<MapScreen> {
         zoomControlsEnabled: false,
         myLocationButtonEnabled: false,
         onMapCreated: (controller) => _googleMapController = controller,
+        markers: {
+          //if (_origin != null) _origin,
+          //if (_destination != null) _destination,
+        },
+        onLongPress: _addMarker,
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColor,
