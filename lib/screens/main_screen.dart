@@ -39,7 +39,7 @@ class _MainScreenState extends State<MainScreen> {
             SizedBox(width: 7.0),
           ],
         ),
-        color: Theme.of(context).primaryColor,
+        color: Colors.white,
       ),
     );
   }

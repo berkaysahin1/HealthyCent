@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:healthycent/util/places.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({Key? key}) : super(key: key);
@@ -20,7 +20,19 @@ class _MapScreenState extends State<MapScreen> {
     _googleMapController!.dispose();
     super.dispose();
   }
+  late int spbakiye;
+  Future<void> girisOku() async{
+    var sp= await SharedPreferences.getInstance();
+    setState(() {
+      spbakiye=sp.getInt("bakiye")!;
 
+    });
+  }
+  @override
+  void initState(){
+    super.initState();
+    girisOku();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +51,7 @@ class _MapScreenState extends State<MapScreen> {
             child: Padding(
               padding: const EdgeInsets.only(top: 8, right: 3, left: 3),
               child: Text(
-                'Bakiye: 15TL',
+                'Bakiye: ${spbakiye}TL',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 22, color: Colors.white),
               ),

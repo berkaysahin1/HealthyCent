@@ -1,13 +1,14 @@
 {
   "project_info": {
     "project_number": "104640192334",
+    "firebase_url": "https://healthycent-c0d93-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "healthycent-c0d93",
     "storage_bucket": "healthycent-c0d93.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:104640192334:android:5b83ecc12de16e3bb6081f",
+        "mobilesdk_app_id": "1:104640192334:android:4e10af539494ec73b6081f",
         "android_client_info": {
           "package_name": "com.example.healthycent"
         }

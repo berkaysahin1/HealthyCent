@@ -1,7 +1,56 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+<<<<<<< Updated upstream
 class Home extends StatelessWidget {
+=======
+import 'loginscreen.dart';
+
+
+class Home extends StatefulWidget {
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+late int spbakiye;
+late int spadim;
+late int sppuan;
+late int sptthak;
+late int spttkul;
+late String spKullanici;
+late String spSifre;
+late String spAd;
+
+  Future<void> girisOku() async{
+    var sp= await SharedPreferences.getInstance();
+    setState(() {
+      spKullanici=sp.getString("KullaniciAdi")!;
+      spSifre=sp.getString("sifre")!;
+      spAd=sp.getString("Ad")!;
+      spbakiye=sp.getInt("bakiye")!;
+      sppuan=sp.getInt("puan")!;
+      spadim=sp.getInt("adim")!;
+      sptthak=sp.getInt("tthak")!;
+      spttkul=sp.getInt("ttkul")!;
+    });
+  }
+
+  Future<void> cikisYap() async{
+    var sp= await SharedPreferences.getInstance();
+    sp.remove("KullaniciAdi");
+    sp.remove("sifre");
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+
+
+  }
+@override
+void initState(){
+  super.initState();
+  girisOku();
+}
+>>>>>>> Stashed changes
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -10,12 +59,12 @@ class Home extends StatelessWidget {
         title: Text("HealthyCent"),
         centerTitle: true,
         actions: <Widget>[
-          // IconButton(
-          //   icon: IconBadge(
-          //     icon: Icons.notifications_none,
-          //   ),
-          //   onPressed: () {},
-          // ),
+          IconButton(
+            icon: Icon(Icons.exit_to_app),
+            onPressed: () {
+              cikisYap();
+            },
+          ),
         ],
       ),
       body: ListView(
@@ -52,6 +101,7 @@ class Home extends StatelessWidget {
                                 "https://www.pngfind.com/pngs/m/389-3898402_feet-icon-blue-foot-icon-hd-png-download.png")
                             as ImageProvider,
                       ),
+<<<<<<< Updated upstream
                     ),
                   ),
                   ListTile(
@@ -66,6 +116,18 @@ class Home extends StatelessWidget {
                       style: TextStyle(fontSize: 13, color: Colors.white),
                     ),
                   ),
+=======
+
+                      ListTile(
+                        title: Text(
+                          'Adımlarınız: ${spadim}/10000',textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 22, color: Colors.white),
+                        ),
+                        subtitle: Text("Her 10.000 adımda 2TL bakiye yüklenecektir.",textAlign: TextAlign.center,style: TextStyle(fontSize: 13, color: Colors.white),),
+                      ),
+
+
+>>>>>>> Stashed changes
                 ],
               ),
             ),
@@ -73,6 +135,7 @@ class Home extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(top: 5, left: 30, right: 30),
             child: Card(
+<<<<<<< Updated upstream
               color: Colors.green,
               shape: RoundedRectangleBorder(
                 side: BorderSide(color: Colors.white70, width: 1),
@@ -87,6 +150,26 @@ class Home extends StatelessWidget {
                         'Bakiye: 12TL\n Puan: 2000',
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 22, color: Colors.white),
+=======
+                        color: Colors.green,
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(color: Colors.white70, width: 1),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        margin: EdgeInsets.all(20.0),
+                        child: Container(
+                          child: Column(
+                            children: <Widget>[
+                              ListTile(
+                                title: Text(
+                                  'Bakiye: ${spbakiye}TL\n Puan: ${sppuan}',textAlign: TextAlign.center,
+                                  style: TextStyle(fontSize: 22, color: Colors.white),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+>>>>>>> Stashed changes
                       ),
                     ),
                   ],
@@ -121,8 +204,12 @@ class Home extends StatelessWidget {
                   ),
                   ListTile(
                     title: Text(
+<<<<<<< Updated upstream
                       'Toplu Taşıma Kullanımı: 12/20\n Ücretsiz Kullanım Hakkınız: 0',
                       textAlign: TextAlign.center,
+=======
+                      'Toplu Taşıma Kullanımı: ${spttkul}/20\n Ücretsiz Kullanım Hakkınız: ${sptthak}',textAlign: TextAlign.center,
+>>>>>>> Stashed changes
                       style: TextStyle(fontSize: 22, color: Colors.white),
                     ),
                     subtitle: Text(
