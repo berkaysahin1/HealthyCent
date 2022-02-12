@@ -125,6 +125,11 @@ class _donatescreenState extends State<donatescreen> {
                     print("vakif adı: ${vakif.vakif_Adi}");
                   },
                   child: Card(
+                    margin: EdgeInsets.all(5.0),
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(color: Colors.white70, width: 1),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
                     color: Colors.green,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -133,16 +138,22 @@ class _donatescreenState extends State<donatescreen> {
                           padding: const EdgeInsets.all(8.0),
                           child: Image.network("${vakif.vakif_Foto}"),
                         ),
-                        Text(
-                          vakif.vakif_Adi,
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            vakif.vakif_Adi,
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
                         ),
-                        Text(
-                          vakif.vakif_Alani,
-                          style: TextStyle(fontSize: 12, color: Colors.white),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            vakif.vakif_Alani,
+                            style: TextStyle(fontSize: 12, color: Colors.white),
+                          ),
                         ),
                       ],
                     ),

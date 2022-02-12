@@ -50,12 +50,11 @@ class _VideoState extends State<Video> {
           centerTitle: true,
           actions: <Widget>[
             Card(
+              margin: EdgeInsets.all(5.0),
               color: Colors.green,
               shape: RoundedRectangleBorder(
-                // side: BorderSide(color: Colors.white70, width: 1),
                 borderRadius: BorderRadius.circular(10),
               ),
-              // margin: EdgeInsets.all(7.0),
               child: Padding(
                 padding: const EdgeInsets.only(top: 8, right: 3, left: 3),
                 child: Text(
@@ -113,24 +112,35 @@ class _VideoState extends State<Video> {
                                 )));
                   },
                   child: Card(
+                    margin: EdgeInsets.all(5.0),
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(color: Colors.white70, width: 1),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
                     color: Colors.red,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(10.0),
                           child: Image.network("${video.video_Foto}"),
                         ),
-                        Text(
-                          video.video_Adi,
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            video.video_Adi,
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
                         ),
-                        Text(
-                          video.video_EgitmenAdi,
-                          style: TextStyle(fontSize: 12, color: Colors.white),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            video.video_EgitmenAdi,
+                            style: TextStyle(fontSize: 12, color: Colors.white),
+                          ),
                         ),
                       ],
                     ),
