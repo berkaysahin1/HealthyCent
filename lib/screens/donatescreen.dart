@@ -2,11 +2,10 @@ import 'dart:collection';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:healthycent/db/Vakiflar.dart';
-import 'package:healthycent/db/Videos.dart';
+
 import 'package:healthycent/db/veritabaniyardimcisi.dart';
 import 'package:healthycent/screens/vakiflardetails.dart';
-import 'package:healthycent/screens/videodetails.dart';
-import 'package:healthycent/util/places.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class donatescreen extends StatefulWidget {

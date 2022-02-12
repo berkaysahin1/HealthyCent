@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:healthycent/screens/loginscreen.dart';
 import '../db/Users.dart';
 import '../db/veritabaniyardimcisi.dart';
 
@@ -46,9 +47,14 @@ class _registerscreenState extends State<registerscreen> {
     bilgiler["User_Email"] = Email;
     bilgiler["User_Sifre"] = Sifre;
     bilgiler["User_Gsm"] = GsmVeri;
-
+    bilgiler["User_Bakiye"] = 0;
+    bilgiler["User_Puan"] = 0;
+    bilgiler["User_TopHak"] = 0;
+    bilgiler["User_TopTasKul"] = 0;
+    bilgiler["User_AdimSayisi"] = 0;
     await db.insert("Users", bilgiler);
     print("eklendi");
+    Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => LoginScreen()));
     return [];
   }
 
