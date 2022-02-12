@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import '../db/Users.dart';
+import '../db/veritabaniyardimcisi.dart';
 
 class registerscreen extends StatefulWidget {
   const registerscreen({Key? key}) : super(key: key);
@@ -10,20 +12,52 @@ class registerscreen extends StatefulWidget {
 }
 
 class _registerscreenState extends State<registerscreen> {
-  var tfadsoyad=TextEditingController();
-  var tfeposta=TextEditingController();
-  var tfgsm=TextEditingController();
-  var tfsifre=TextEditingController();
-  var scaffoldKey=GlobalKey<ScaffoldState>();
+  var tfadsoyad = TextEditingController();
+  var tfeposta = TextEditingController();
+  var tfgsm = TextEditingController();
+  var tfsifre = TextEditingController();
+  var scaffoldKey = GlobalKey<ScaffoldState>();
+
+  Future<void> kayit() async {
+    if (tfsifre.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Şifre boş bırakılamaz.')));
+    } else if (tfgsm.text.length != 10) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('Telefon numarası 10 haneli girilmelidir.')));
+    } else if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+        .hasMatch(tfeposta.text)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Yanlış e-posta formatı.')));
+    } else if (tfadsoyad.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Ad-Soyad boş bırakılamaz.')));
+    } else {
+      UserAdd(tfadsoyad.text, tfeposta.text, tfsifre.text, tfgsm.text);
+    }
+  }
+
+  Future<List<Users>> UserAdd(
+      String Ad, String Email, String Sifre, String Gsm) async {
+    var db = await VeritabaniYardimcisi.veritabaniErisim();
+    var bilgiler = Map<String, dynamic>();
+    var GsmVeri = int.parse(Gsm);
+    bilgiler['User_AdSoyad'] = Ad;
+    bilgiler["User_Email"] = Email;
+    bilgiler["User_Sifre"] = Sifre;
+    bilgiler["User_Gsm"] = GsmVeri;
+
+    await db.insert("Users", bilgiler);
+    print("eklendi");
+    return [];
+  }
 
   bool isChecked = false;
-
 
   Widget _buildLoginButton() {
     return SizedBox(
       height: 64,
       width: double.infinity,
-
       child: ElevatedButton(
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(
@@ -45,11 +79,10 @@ class _registerscreenState extends State<registerscreen> {
             fontSize: 16,
             fontWeight: FontWeight.bold,
             color: Colors.black,
-
           ),
         ),
         onPressed: () {
-
+          kayit();
         },
       ),
     );
@@ -62,9 +95,7 @@ class _registerscreenState extends State<registerscreen> {
         body: Container(
           width: double.infinity,
           height: double.infinity,
-          decoration: const BoxDecoration(
-              color: Colors.green
-          ),
+          decoration: const BoxDecoration(color: Colors.green),
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(
@@ -155,7 +186,6 @@ class _registerscreenState extends State<registerscreen> {
                       ),
                     ),
                   ),
-
                   const SizedBox(
                     height: 30,
                   ),
@@ -174,7 +204,7 @@ class _registerscreenState extends State<registerscreen> {
                   const SizedBox(
                     height: 10,
                   ),
-                  TextField(
+                  TextFormField(
                     controller: tfsifre,
                     cursorColor: Colors.white,
                     cursorWidth: 2,
@@ -184,7 +214,8 @@ class _registerscreenState extends State<registerscreen> {
                       border: InputBorder.none,
                       filled: true,
                       fillColor: Colors.green,
-                      prefixIcon: const Icon(Icons.vpn_key, color: Colors.white),
+                      prefixIcon:
+                          const Icon(Icons.vpn_key, color: Colors.white),
                       hintText: "Şifrenizi Giriniz...",
                       hintStyle: const TextStyle(
                         color: Colors.white54,
@@ -212,12 +243,14 @@ class _registerscreenState extends State<registerscreen> {
                     height: 10,
                   ),
                   TextFormField(
-
                     keyboardType: TextInputType.number,
                     controller: tfgsm,
                     cursorColor: Colors.white,
                     cursorWidth: 2,
                     obscureText: false,
+                    inputFormatters: [
+                      LengthLimitingTextInputFormatter(10),
+                    ],
                     style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       border: InputBorder.none,
@@ -232,7 +265,6 @@ class _registerscreenState extends State<registerscreen> {
                       ),
                     ),
                   ),
-
                   const SizedBox(
                     height: 15,
                   ),
