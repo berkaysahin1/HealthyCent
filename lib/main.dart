@@ -1,15 +1,7 @@
-<<<<<<< Updated upstream
-import 'dart:collection';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-import 'package:firebase_database/firebase_database.dart';
-=======
 
 
 import 'package:firebase_core/firebase_core.dart';
 
->>>>>>> Stashed changes
 import 'package:flutter/material.dart';
 import 'package:healthycent/screens/loginscreen.dart';
 import 'package:healthycent/screens/main_screen.dart';
@@ -29,15 +21,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-<<<<<<< Updated upstream
-  var refTest = FirebaseDatabase.instance.ref("test");
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
-=======
   late String spKullanici;
   late String spSifre;
   late String spAd;
@@ -61,7 +44,6 @@ class _MyAppState extends State<MyApp> {
   }
 
 
->>>>>>> Stashed changes
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
