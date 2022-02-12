@@ -55,8 +55,10 @@ class _donatescreenState extends State<donatescreen> {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.green,
           title: Text("HealthyCent"),
           centerTitle: true,
           actions: <Widget>[
@@ -81,7 +83,7 @@ class _donatescreenState extends State<donatescreen> {
         body: ListView(
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.all(14.0),
+              padding: const EdgeInsets.all(8.0),
               child: Text(
                 "Vakiflar",
                 textAlign: TextAlign.center,
@@ -91,15 +93,15 @@ class _donatescreenState extends State<donatescreen> {
                 ),
               ),
             ),
-            videocek(context),
+            videocek(context,height),
           ],
         ));
   }
 
-  videocek(BuildContext context) {
+  videocek(BuildContext context,height) {
     return Container(
+      height: height/1.38,
       padding: EdgeInsets.only(top: 10.0, left: 20.0),
-      height: 310.0,
       child: FutureBuilder<List<Vakiflar>>(
         future: vakifList(),
         builder: (context, snapshot) {

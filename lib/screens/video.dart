@@ -45,12 +45,13 @@ class _VideoState extends State<Video> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.red,
           title: Text("HealthyCent"),
           centerTitle: true,
           actions: <Widget>[
             Card(
               margin: EdgeInsets.all(5.0),
-              color: Colors.green,
+              color: Colors.black,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
@@ -84,9 +85,11 @@ class _VideoState extends State<Video> {
   }
 
   videocek(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     return Container(
+
       padding: EdgeInsets.only(top: 10.0, left: 20.0),
-      height: 310.0,
+      height: height/1.35,
       child: FutureBuilder<List<Videos>>(
         future: videoList(),
         builder: (context, snapshot) {
